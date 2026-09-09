@@ -20,14 +20,14 @@ const Header = () => {
             variant="h6" 
             component={Link} 
             to="/" 
-            sx={{ 
-              flexGrow: 1, 
-              textDecoration: 'none', 
+            sx={{
+              flexGrow: 1,
+              textDecoration: 'none',
               color: 'inherit',
               fontWeight: 700,
             }}
           >
-            Mood Timer App
+            Earworm
           </Typography>
           
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
@@ -50,14 +50,25 @@ const Header = () => {
                 </Button>
                 <Button
                   component={Link}
-                  to="/search"
+                  to="/log"
                   color="inherit"
                   sx={{
                     textDecoration: 'none',
-                    fontWeight: isActiveRoute('/search') ? 700 : 400,
+                    fontWeight: isActiveRoute('/log') ? 700 : 400,
                   }}
                 >
-                  Search
+                  Log
+                </Button>
+                <Button
+                  component={Link}
+                  to="/entries"
+                  color="inherit"
+                  sx={{
+                    textDecoration: 'none',
+                    fontWeight: isActiveRoute('/entries') ? 700 : 400,
+                  }}
+                >
+                  Past entries
                 </Button>
                 <UserButton 
                   afterSignOutUrl="/"
