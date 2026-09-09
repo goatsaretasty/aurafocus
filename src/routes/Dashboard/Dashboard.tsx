@@ -11,13 +11,10 @@ export default function DashboardPage() {
           <Link to="/">Return to index</Link>
         </li>
         <li>
-          <Link to="/search">Search</Link>
+          <Link to="/log">Log a song</Link>
         </li>
         <li>
-          <Link to="/PastAurasPage">Past Auras</Link>
-        </li>
-        <li>
-          <Link to="/PastFocusScapePage">Past Focus Scape</Link>
+          <Link to="/entries">Past entries</Link>
         </li>
       </ul>
       <PomodoroTimer />

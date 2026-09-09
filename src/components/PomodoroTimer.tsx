@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button, TextField, Typography, Box, CircularProgress, Snackbar, Alert, Modal, Grid } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom'; // for navigation
 
@@ -15,7 +15,10 @@ const PomodoroTimer = () => {
   const [openModal, setOpenModal] = useState(false);
 
   const location = useLocation();
-  const bellSound = new Audio('/sounds/bell.mp3');
+  const bellSoundRef = useRef<HTMLAudioElement | null>(null);
+  if (!bellSoundRef.current) {
+    bellSoundRef.current = new Audio('/sounds/bell.mp3');
+  }
 
   const handlePomodoroChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
@@ -87,7 +90,7 @@ const PomodoroTimer = () => {
         setTimeLeft((prev) => {
           if (prev === 1) {
             // Play the bell sound when timer ends with proper error handling
-            bellSound.play().catch(error => {
+            bellSoundRef.current?.play().catch(error => {
               console.error('Error playing sound:', error);
               // Optionally show an error message to the user
               setSnackbarMessage('Could not play notification sound');
@@ -113,7 +116,7 @@ const PomodoroTimer = () => {
     }
 
     return () => clearInterval(timer); // Cleanup interval on component unmount or when isRunning changes
-  }, [isRunning, pomodoroDuration, breakDuration, isPomodoro, bellSound]);
+  }, [isRunning, pomodoroDuration, breakDuration, isPomodoro]);
 
   const handleStartPause = () => {
     setIsRunning(!isRunning);

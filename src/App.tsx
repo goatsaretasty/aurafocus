@@ -6,9 +6,9 @@ import Layout from './components/Layout'
 import SignInPage from './routes/SignInPage'
 import SignUpPage from './routes/SignUpPage'
 import DashboardPage from './routes/Dashboard/Dashboard'
-import MoodInputForm from './routes/MoodInputForm'
+import EntryForm from './routes/EntryForm'
+import PastEntriesPage from './routes/PastEntriesPage'
 import PomodoroTimerPage from './routes/PomodoroTimerPage'
-import SearchPage from './routes/SearchPage'
 import NotFound from './components/NotFound'
 
 const App = () => {
@@ -35,14 +35,14 @@ const App = () => {
             <DashboardPage />
           </SignedIn>
         } />
-        <Route path="/search" element={
+        <Route path="/entries" element={
           <SignedIn>
-            <SearchPage />
+            <PastEntriesPage />
           </SignedIn>
         } />
-        <Route path="/mood-input" element={
+        <Route path="/log" element={
           <SignedIn>
-            <MoodInputForm />
+            <EntryForm />
           </SignedIn>
         } />
         <Route path="/pomodoro-timer" element={
