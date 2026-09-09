@@ -15,10 +15,10 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       }}
     >
       <Header />
-      <Container 
-        component="main" 
-        maxWidth="lg" 
-        sx={{ 
+      <Container
+        component="main"
+        maxWidth="md"
+        sx={{
           flexGrow: 1,
           py: 4,
           px: { xs: 2, sm: 3 },
