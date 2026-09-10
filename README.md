@@ -13,8 +13,12 @@ No configuration, no keys — entries live in this browser's `localStorage`.
 ## Stages
 
 - [x] **1 — Log + list.** Form, entries in `localStorage`, list grouped by month.
-- [ ] **2 — Word clouds by month.** Tokenize the musings, drop stopwords, count,
-      size the words. Client-side, no library.
+- [x] **2 — Word clouds by month.** Tokenize the musings, drop stopwords, count,
+      size the words. Client-side, no library. Words are laid out in hash order
+      so the heavy ones scatter instead of clumping by first letter; a month
+      where nothing has repeated yet renders flat rather than all-max-size.
+      No stemming, so `minute`/`minutes` count separately — deliberate, since
+      naive suffix-stripping produces worse artifacts than it fixes.
 - [ ] **3 — Real persistence.** Swap `localStorage` for a backend (Supabase free
       tier). This is where Clerk auth comes back in — it was stripped from the
       runtime in stage 1 because auth over a per-browser store is theater. The

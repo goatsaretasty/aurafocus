@@ -1,5 +1,7 @@
 import { Box, IconButton, Paper, Stack, Typography } from '@mui/material'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
+import WordCloud from './WordCloud'
+import { topWords } from '../wordCloud'
 import type { Entry } from '../types'
 
 function groupByMonth(entries: Entry[]) {
@@ -54,7 +56,9 @@ const EntryList = ({
             {monthLabel(monthEntries[0])} · {monthEntries.length}
           </Typography>
 
-          <Stack spacing={2}>
+          <WordCloud words={topWords(monthEntries.map((entry) => entry.musing))} />
+
+          <Stack spacing={2} sx={{ mt: 2 }}>
             {monthEntries.map((entry) => (
               <Paper key={entry.id} variant="outlined" sx={{ p: 2 }}>
                 <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 1 }}>
