@@ -13,11 +13,13 @@ export function loadEntries(): Entry[] {
   }
 }
 
-export function saveEntries(entries: Entry[]): void {
+// Private browsing and full quotas both throw on write. Returns false so the
+// UI can warn that entries won't survive a reload.
+export function saveEntries(entries: Entry[]): boolean {
   try {
     localStorage.setItem(KEY, JSON.stringify(entries))
+    return true
   } catch {
-    // Private browsing and full quotas both throw here. Entries stay in memory
-    // for the session and the page keeps working.
+    return false
   }
 }

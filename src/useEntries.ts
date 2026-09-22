@@ -6,10 +6,11 @@ export type NewEntry = Pick<Entry, 'song' | 'artist' | 'musing'>
 
 export function useEntries() {
   const [entries, setEntries] = useState<Entry[]>(loadEntries)
+  const [saveFailed, setSaveFailed] = useState(false)
 
   function commit(next: Entry[]) {
     setEntries(next)
-    saveEntries(next)
+    setSaveFailed(!saveEntries(next))
   }
 
   function addEntry(input: NewEntry) {
@@ -27,5 +28,5 @@ export function useEntries() {
     commit(entries.filter((entry) => entry.id !== id))
   }
 
-  return { entries, addEntry, deleteEntry }
+  return { entries, addEntry, deleteEntry, saveFailed }
 }

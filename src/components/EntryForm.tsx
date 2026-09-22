@@ -2,6 +2,11 @@ import { useState } from 'react'
 import { Box, Button, Paper, Stack, TextField, Typography } from '@mui/material'
 import type { NewEntry } from '../useEntries'
 
+// localStorage caps out around 5MB per site, so unbounded notes would
+// eventually make every save fail.
+const MAX_TITLE = 200
+const MAX_MUSING = 2000
+
 const EntryForm = ({ onAdd }: { onAdd: (entry: NewEntry) => void }) => {
   const [song, setSong] = useState('')
   const [artist, setArtist] = useState('')
@@ -34,6 +39,7 @@ const EntryForm = ({ onAdd }: { onAdd: (entry: NewEntry) => void }) => {
             fullWidth
             required
             autoComplete="off"
+            slotProps={{ htmlInput: { maxLength: MAX_TITLE } }}
           />
           <TextField
             label="Artist"
@@ -41,6 +47,7 @@ const EntryForm = ({ onAdd }: { onAdd: (entry: NewEntry) => void }) => {
             onChange={(e) => setArtist(e.target.value)}
             fullWidth
             autoComplete="off"
+            slotProps={{ htmlInput: { maxLength: MAX_TITLE } }}
           />
         </Box>
 
@@ -51,6 +58,8 @@ const EntryForm = ({ onAdd }: { onAdd: (entry: NewEntry) => void }) => {
           fullWidth
           multiline
           minRows={3}
+          slotProps={{ htmlInput: { maxLength: MAX_MUSING } }}
+          helperText={musing.length > MAX_MUSING * 0.9 ? `${musing.length} / ${MAX_MUSING}` : ' '}
         />
 
         <Box>
