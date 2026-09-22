@@ -18,6 +18,6 @@ export function saveEntries(entries: Entry[]): void {
     localStorage.setItem(KEY, JSON.stringify(entries))
   } catch {
     // Private browsing and full quotas both throw here. Entries stay in memory
-    // for the session rather than taking the page down.
+    // for the session and the page keeps working.
   }
 }
